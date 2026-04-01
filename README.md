@@ -1,21 +1,21 @@
 # Anki Vocabulary Automation Pipeline
 
-在使用 anki 背單字的時候，我發現紀錄每個單字是最花時間的，那為什麼不用自動化一點的是來達成。
-本專案是想要用 nvim 強大的編輯能力來結合 python 爬蟲功能，從劍橋詞典抓取資料，來達到在終端機內編輯與 anki.app 同步預覽的能力。
+在使用 anki 背單字的時候，我發現紀錄每個單字是最花時間的，那為什麼不用自動化一點的方式來達成。
+本專案是想要用 nvim 強大的編輯能力來結合 python 爬蟲功能，從劍橋詞典抓取資料，達到在終端機內編輯與 anki.app 同步預覽的能力。
 
 ---
 
 ## 流程架構 (Pipeline Overview)
 
-1.  **資料獲取 ([grab.py]("/Users/sil/anki/grab.py"))**：從劍橋詞典爬取定義、例句與片語，並產出結構化 HTML。
-2.  **編輯與診斷 ([anki.lua](~/.config/nvim/lua/custom/anki.lua)**：在 Neovim 內進行 HTML 標籤閉合檢查與單字提取。
+1.  **資料獲取 ([grab.py]("./grab.py"))**：從劍橋詞典爬取定義、例句與片語，並產出結構化 HTML。
+2.  **編輯與診斷 ([anki.lua](~/.config/nvim/lua/ckstom/anki.lua))**：在 Neovim 內進行 HTML 標籤閉合檢查與單字提取。
 3.  **無縫同步 (`AnkiConnect`)**：透過 API 自動在 Anki 中新增或更新卡片。
 
 ---
 
 ## 核心組件說明
 
-### 1. 爬蟲引擎 ([grab.py]("/User/sil/grab.py"))
+### 1. 爬蟲引擎 ([grab.py]("./grab.py"))
 * **動態內容解析**：自動區分「一般定義（紫色）」與「進階片語（綠色）」。
 * **關鍵字高亮**：利用字串替換技術，自動將例句中的目標單字標記為綠色。
 * **反爬機制**：模擬真實 Chrome 146 標頭並內建隨機延遲。
